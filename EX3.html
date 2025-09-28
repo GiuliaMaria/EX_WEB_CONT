@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Manipulação do DOM + Contador</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-right: 10px;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4CAF50;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      width: 350px;
+      min-height: 50px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    #contador {
+      margin-top: 10px;
+      padding: 15px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .contador-buttons {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Manipulação do DOM + Contador</h1>
+
+  <div>
+    <input type="text" id="entrada" placeholder="Digite uma mensagem">
+    <button id="btnMostrar">Mostrar</button>
+    <button id="btnLimpar">Limpar</button>
+  </div>
+
+  <div id="resultado"></div>
+
+  <h2>Contador</h2>
+  <div id="contador">0</div>
+  <div class="contador-buttons">
+    <button id="btnMais">+</button>
+    <button id="btnMenos">-</button>
+    <button id="btnZerar">Zerar</button>
+  </div>
+
+  <script>
+    const entrada = document.getElementById("entrada");
+    const resultado = document.getElementById("resultado");
+
+    document.getElementById("btnMostrar").addEventListener("click", () => {
+      const valor = entrada.value.trim();
+      if (valor !== "") {
+        const novoParagrafo = document.createElement("p");
+        novoParagrafo.textContent = "Você digitou: " + valor;
+        resultado.appendChild(novoParagrafo);
+        entrada.value = "";
+      }
+    });
+
+    document.getElementById("btnLimpar").addEventListener("click", () => {
+      resultado.innerHTML = "";
+    });
+
+    let contador = 0;
+    const contadorDiv = document.getElementById("contador");
+
+    function atualizarContador() {
+      contadorDiv.textContent = contador;
+    }
+
+    document.getElementById("btnMais").addEventListener("click", () => {
+      contador++;
+      atualizarContador();
+    });
+
+    document.getElementById("btnMenos").addEventListener("click", () => {
+      contador--;
+      atualizarContador();
+    });
+
+    document.getElementById("btnZerar").addEventListener("click", () => {
+      contador = 0;
+      atualizarContador();
+    });
+  </script>
+</body>
+</html>
